@@ -150,7 +150,7 @@ ${customRouteData.healthNotes ? 'Obs: ' + customRouteData.healthNotes : ''}
 
     setCustomRouteSubmitted(true);
 
-@@ -488,55 +513,62 @@ ${customRouteData.healthNotes ? 'Obs: ' + customRouteData.healthNotes : ''}
+    {customRouteData.healthNotes ? 'Obs: ' + customRouteData.healthNotes : ''}
                   <input
                     type="text"
                     id="lead-city"
