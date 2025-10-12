@@ -36,7 +36,7 @@ const ROUTES = [
     city: '',
     lgpdConsent: false
     });
-   }
+   }]
   const [customRouteData, setCustomRouteData] = useState({
     experienceType: '',
     distance: '',
