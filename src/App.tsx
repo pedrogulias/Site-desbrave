@@ -26,7 +26,8 @@ const ROUTES = [
     name: 'Rota Romântica',
     mood: ['Socialização', 'Descanso'],
     distance: '20–30 km',
-@@ -89,89 +90,113 @@ function App() {
+  },
+   function App() {
   const [leadFormData, setLeadFormData] = useState({
     name: '',
     email: '',
@@ -34,7 +35,8 @@ const ROUTES = [
     interest: '',
     city: '',
     lgpdConsent: false
-  });
+    });
+   }
   const [customRouteData, setCustomRouteData] = useState({
     experienceType: '',
     distance: '',
