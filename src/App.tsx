@@ -21,22 +21,23 @@ const ROUTES = [
     itinerary: ['Partida de Maquiné', 'Subida suave pela serra', 'Parada na Cascata do Ouro', 'Descida técnica pelos vales', 'Chegada com vista panorâmica'],
     whatToBring: ['Mochila leve (até 5L)', 'Água (1,5L mínimo)', 'Lanche energético', 'Protetor solar', 'Óculos de sol', 'Roupa confortável']
   },
-  {
+    {
     id: 'rota-romantica',
     name: 'Rota Romântica',
     mood: ['Socialização', 'Descanso'],
     distance: '20–30 km',
   },
-   function App() {
-  const [leadFormData, setLeadFormData] = useState({
+];
+
+function App() {
+    const [leadFormData, setLeadFormData] = useState({
     name: '',
     email: '',
     phone: '',
     interest: '',
     city: '',
-    lgpdConsent: false
-    });
-   }]
+    lgpdConsent: false,
+  });
   const [customRouteData, setCustomRouteData] = useState({
     experienceType: '',
     distance: '',
@@ -86,7 +87,6 @@ const ROUTES = [
     window.open(buildWhatsAppLink(message), '_blank');
   };
 
-  const handleLeadFormSubmit = (e: React.FormEvent) => {
   const handleLeadFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     trackEvent('lead_submit', { interest: leadFormData.interest });
@@ -127,9 +127,10 @@ const ROUTES = [
     }
   };
 
-  const handleCustomRouteSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const summary = `
+ const handleCustomRouteSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const summary = `
 Tipo: ${customRouteData.experienceType}
 Distância: ${customRouteData.distance}
 Ritmo: ${customRouteData.pace}
@@ -141,15 +142,18 @@ Participantes: ${customRouteData.participants}
 Datas: ${customRouteData.dateWindow}
 Origem: ${customRouteData.originCity}
 ${customRouteData.healthNotes ? 'Obs: ' + customRouteData.healthNotes : ''}
-    `.trim();
+  `.trim();
 
-    trackEvent('custom_route_submit', {
-      experienceType: customRouteData.experienceType,
-      participants: customRouteData.participants
-    });
+  trackEvent('custom_route_submit', {
+    experienceType: customRouteData.experienceType,
+    participants: customRouteData.participants,
+  });
 
-    setCustomRouteSubmitted(true);
+  setCustomRouteSubmitted(true);
 
+  // opcional: abre WhatsApp com o resumo
+  window.open(buildWhatsAppLink(summary, 'custom_route'), '_blank');
+};
     {customRouteData.healthNotes ? 'Obs: ' + customRouteData.healthNotes : ''}
                   <input
                     type="text"
