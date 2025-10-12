@@ -154,61 +154,8 @@ ${customRouteData.healthNotes ? 'Obs: ' + customRouteData.healthNotes : ''}
   // opcional: abre WhatsApp com o resumo
   window.open(buildWhatsAppLink(summary, 'custom_route'), '_blank');
 };
-    {customRouteData.healthNotes ? 'Obs: ' + customRouteData.healthNotes : ''}
-                  <input
-                    type="text"
-                    id="lead-city"
-                    required
-                    value={leadFormData.city}
-                    onChange={(e) => setLeadFormData({...leadFormData, city: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                    placeholder="Porto Alegre/RS"
-                  />
-                </div>
-
-                <div className="flex items-start">
-                  <input
-                    type="checkbox"
-                    id="lead-lgpd"
-                    required
-                    checked={leadFormData.lgpdConsent}
-                    onChange={(e) => setLeadFormData({...leadFormData, lgpdConsent: e.target.checked})}
-                    className="mt-1 h-5 w-5 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500"
-                  />
-                  <label htmlFor="lead-lgpd" className="ml-3 text-sm text-gray-600">
-                    Aceito receber comunicações da Desbrave e concordo com a <a href="#privacidade" className="text-emerald-600 underline">Política de Privacidade</a>. *
-                  </label>
-                </div>
-
-                {leadFormError && (
-                  <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-                    {leadFormError}
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  className="w-full bg-emerald-600 text-white px-8 py-4 rounded-full hover:bg-emerald-700 transition-all transform hover:scale-105 shadow-lg font-semibold text-lg"
-                  disabled={leadFormSending}
-                  className={`w-full bg-emerald-600 text-white px-8 py-4 rounded-full transition-all transform shadow-lg font-semibold text-lg ${leadFormSending ? 'opacity-70 cursor-not-allowed' : 'hover:bg-emerald-700 hover:scale-105'}`}
-                >
-                  Quero meu mini-guia
-                  {leadFormSending ? 'Enviando...' : 'Quero meu mini-guia'}
-                </button>
-              </form>
-            </div>
-          ) : (
-            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 text-center">
-              <Check className="h-16 w-16 text-emerald-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Obrigado!</h3>
-              <p className="text-lg text-gray-600">
-                Já recebemos teus dados. Para agilizar, te atendo no WhatsApp agora.
-              </p>
-            </div>
-          )}
-        </div>
-      </section>
-
+return (
+    <>
       {/* Routes Section */}
       <section id="roteiros" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
@@ -219,3 +166,11 @@ ${customRouteData.healthNotes ? 'Obs: ' + customRouteData.healthNotes : ''}
               briefing de segurança e o cuidado que tu mereces.
             </p>
           </div>
+          {/* ...todo o restante do seu JSX que hoje está fora de qualquer função... */}
+        </div>
+      </section>
+    </>
+  );
+  } // fecha o componente
+
+export default App;
