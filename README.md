@@ -19,10 +19,10 @@ O formulário do mini-guia envia os dados através da função `enviarLead`, que
 2. Vai em **Extensões → Apps Script**. Um novo projeto de script será criado atrelado a essa planilha.
 3. Substitui o conteúdo do editor pelo código abaixo (ajusta o nome da aba em `SHEET_NAME` se necessário):
 
-   ```ts
+   ```js
    const SHEET_NAME = 'Página1';
 
-   function doPost(e: GoogleAppsScript.Events.DoPost) {
+   function doPost(e) {
      try {
        const body = JSON.parse(e.postData.contents);
        const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
@@ -51,7 +51,7 @@ O formulário do mini-guia envia os dados através da função `enviarLead`, que
      }
    }
    ```
-
+   > ℹ️ O editor do Apps Script executa JavaScript puro. Se copiares um exemplo tipado (com `: GoogleAppsScript.Events.DoPost`, por exemplo), o deploy vai falhar com erro de sintaxe.
 4. Clica em **Deploy → New deployment**, escolhe o tipo **Web app**, define qualquer descrição, em **Execute as** seleciona *Você* e em **Quem tem acesso** marca *Anyone*. Confirma em **Deploy** e copia a URL gerada.
 5. Cola a URL na variável `VITE_APP_SCRIPT_URL` do teu arquivo `.env` ou, se preferir manter a configuração fora do build, abre `public/app-config.json` e preenche o campo `appScriptUrl` com a mesma URL.
 6. Reinicia o servidor de desenvolvimento (`npm run dev`) para que a nova variável seja carregada (se usares `.env`). Para a configuração via `public/app-config.json`, basta salvar o arquivo e recarregar a página.
