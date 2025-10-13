@@ -19,10 +19,10 @@ O formulário do mini-guia envia os dados através da função `enviarLead`, que
 2. Vai em **Extensões → Apps Script**. Um novo projeto de script será criado atrelado a essa planilha.
 3. Substitui o conteúdo do editor pelo código abaixo (ajusta o nome da aba em `SHEET_NAME` se necessário):
 
-   ```js
+   ```ts
    const SHEET_NAME = 'Página1';
 
-   function doPost(e) {
+   function doPost(e: GoogleAppsScript.Events.DoPost) {
      try {
        const body = JSON.parse(e.postData.contents);
        const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
@@ -51,7 +51,7 @@ O formulário do mini-guia envia os dados através da função `enviarLead`, que
      }
    }
    ```
-   > ℹ️ O editor do Apps Script executa JavaScript puro. Se copiares um exemplo tipado (com `: GoogleAppsScript.Events.DoPost`, por exemplo), o deploy vai falhar com erro de sintaxe.
+
 4. Clica em **Deploy → New deployment**, escolhe o tipo **Web app**, define qualquer descrição, em **Execute as** seleciona *Você* e em **Quem tem acesso** marca *Anyone*. Confirma em **Deploy** e copia a URL gerada.
 5. Cola a URL na variável `VITE_APP_SCRIPT_URL` do teu arquivo `.env` ou, se preferir manter a configuração fora do build, abre `public/app-config.json` e preenche o campo `appScriptUrl` com a mesma URL.
 6. Reinicia o servidor de desenvolvimento (`npm run dev`) para que a nova variável seja carregada (se usares `.env`). Para a configuração via `public/app-config.json`, basta salvar o arquivo e recarregar a página.
@@ -67,6 +67,38 @@ O servidor roda no terminal em que executaste `npm run dev`. Para reiniciá-lo:
 Se estiveres usando um ambiente como VS Code, o terminal integrado funciona da mesma maneira: interrompe com `Ctrl + C` e roda `npm run dev` novamente.
 
 A partir desse momento, sempre que alguém enviar o formulário, o site chamará o Apps Script e os dados serão adicionados automaticamente à planilha. Caso o formulário mostre a mensagem "Nenhuma URL do Google Apps Script configurada", verifica se `VITE_APP_SCRIPT_URL` ou `public/app-config.json` estão preenchidos corretamente e se o deployment do Apps Script está ativo.
+
+## Como sincronizar teu diretório local com o GitHub
+
+Quando outra pessoa faz alterações e publica na branch `main` do GitHub, tu podes trazer as novidades para o teu computador com os comandos abaixo. Eles assumem que tu já clonaste o repositório e estás dentro da pasta `Site-desbrave`.
+
+1. Garante que não tens alterações pendentes. Se houver, confirma (`git commit`) ou descarta antes de atualizar:
+
+   ```bash
+   git status
+   ```
+
+2. Baixa as atualizações do repositório remoto:
+
+   ```bash
+   git fetch origin
+   ```
+
+3. Aplica as novidades da branch `main` na tua cópia local. Se estiveres na `main`, basta dar merge fast-forward:
+
+   ```bash
+   git checkout main
+   git pull origin main
+   ```
+
+4. Caso trabalhes em outra branch, atualiza a `main` como no passo anterior e depois sincroniza tua branch com ela:
+
+   ```bash
+   git checkout minha-branch
+   git merge main
+   ```
+
+Se preferires reescrever o histórico da tua branch em cima da `main` atualizada (por exemplo, para manter commits lineares), troca o `git merge main` por `git rebase main`. Após sincronizar, roda `npm install` caso o `package.json` tenha sido alterado e reinicia o servidor de desenvolvimento se necessário.
 
 ## Onde ficam as imagens
 
