@@ -1,8 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, MapPin, Clock, TrendingUp, Phone, Mail, Instagram, Check } from 'lucide-react';
+import { enviarLead } from './leadService';
 
-const WHATSAPP_NUMBER = '5551999999999';
+const WHATSAPP_NUMBER = '5551981516983';
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
+
+const createEmptyLeadForm = () => ({
+  name: '',
+  email: '',
+  phone: '',
+  interest: '',
+  city: '',
+  lgpdConsent: false,
+});
 
 const ROUTES = [
   {
@@ -86,14 +96,9 @@ function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedRoute, setSelectedRoute] = useState<typeof ROUTES[0] | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [leadFormData, setLeadFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    interest: '',
-    city: '',
-    lgpdConsent: false
-  });
+  const [leadFormData, setLeadFormData] = useState(createEmptyLeadForm);
+  const [leadFormLoading, setLeadFormLoading] = useState(false);
+  const [leadFormError, setLeadFormError] = useState<string | null>(null);
   const [customRouteData, setCustomRouteData] = useState({
     experienceType: '',
     distance: '',
@@ -141,15 +146,36 @@ function App() {
     window.open(buildWhatsAppLink(message), '_blank');
   };
 
-  const handleLeadFormSubmit = (e: React.FormEvent) => {
+  const handleLeadFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    trackEvent('lead_submit', { interest: leadFormData.interest });
-    setLeadFormSubmitted(true);
+    setLeadFormError(null);
+    setLeadFormLoading(true);
 
-    setTimeout(() => {
-      const message = `Olá! Acabei de baixar o mini-guia e gostaria de saber mais sobre ${leadFormData.interest || 'cicloturismo'}. Meu nome é ${leadFormData.name}.`;
-      window.open(buildWhatsAppLink(message, 'lead_magnet'), '_blank');
-    }, 1500);
+    try {
+      await enviarLead({
+        nomeCompleto: leadFormData.name,
+        email: leadFormData.email,
+        whatsapp: leadFormData.phone,
+        interessePrincipal: leadFormData.interest,
+        cidadeUF: leadFormData.city,
+      });
+
+      trackEvent('lead_submit', { interest: leadFormData.interest });
+      setLeadFormSubmitted(true);
+      const nextMessage = `Olá! Acabei de baixar o mini-guia e gostaria de saber mais sobre ${leadFormData.interest || 'cicloturismo'}. Meu nome é ${leadFormData.name}.`;
+
+      setLeadFormData(createEmptyLeadForm());
+
+      setTimeout(() => {
+        window.open(buildWhatsAppLink(nextMessage, 'lead_magnet'), '_blank');
+      }, 1500);
+    } catch (error) {
+      console.error('Erro ao enviar lead', error);
+      const message = error instanceof Error ? error.message : 'Não foi possível enviar os teus dados agora. Tenta novamente em instantes.';
+      setLeadFormError(message);
+    } finally {
+      setLeadFormLoading(false);
+    }
   };
 
   const handleCustomRouteSubmit = (e: React.FormEvent) => {
@@ -509,12 +535,18 @@ ${customRouteData.healthNotes ? 'Obs: ' + customRouteData.healthNotes : ''}
                     Aceito receber comunicações da Desbrave e concordo com a <a href="#privacidade" className="text-emerald-600 underline">Política de Privacidade</a>. *
                   </label>
                 </div>
+                {leadFormError && (
+                  <p role="alert" aria-live="assertive" className="text-sm text-red-600">
+                    {leadFormError}
+                  </p>
+                )}
 
                 <button
                   type="submit"
-                  className="w-full bg-emerald-600 text-white px-8 py-4 rounded-full hover:bg-emerald-700 transition-all transform hover:scale-105 shadow-lg font-semibold text-lg"
+                  disabled={leadFormLoading}
+                  className={`w-full bg-emerald-600 text-white px-8 py-4 rounded-full transition-all transform shadow-lg font-semibold text-lg ${leadFormLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-emerald-700 hover:scale-105'}`}
                 >
-                  Quero meu mini-guia
+                  {leadFormLoading ? 'Enviando...' : 'Quero meu mini-guia'}
                 </button>
               </form>
             </div>
