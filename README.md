@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Cria um arquivo `.env` na raiz copiando o conteúdo de `.env.example` e preenche a variável `VITE_APP_SCRIPT_URL` conforme explicado abaixo.
+Cria um arquivo `.env` na raiz copiando o conteúdo de `.env.example` **ou** duplica `public/app-config.example.json` para `public/app-config.json`. Em ambos os casos tu vais informar a URL do Google Apps Script (ver passo a passo mais abaixo).
 
 ## Integração do formulário com Google Sheets
 
@@ -53,10 +53,10 @@ O formulário do mini-guia envia os dados através da função `enviarLead`, que
    ```
 
 4. Clica em **Deploy → New deployment**, escolhe o tipo **Web app**, define qualquer descrição, em **Execute as** seleciona *Você* e em **Quem tem acesso** marca *Anyone*. Confirma em **Deploy** e copia a URL gerada.
-5. Cola a URL na variável `VITE_APP_SCRIPT_URL` do teu arquivo `.env`.
-6. Reinicia o servidor de desenvolvimento (`npm run dev`) para que a nova variável seja carregada.
+5. Cola a URL na variável `VITE_APP_SCRIPT_URL` do teu arquivo `.env` ou, se preferir manter a configuração fora do build, abre `public/app-config.json` e preenche o campo `appScriptUrl` com a mesma URL.
+6. Reinicia o servidor de desenvolvimento (`npm run dev`) para que a nova variável seja carregada (se usares `.env`). Para a configuração via `public/app-config.json`, basta salvar o arquivo e recarregar a página.
 
-A partir desse momento, sempre que alguém enviar o formulário, o site chamará o Apps Script e os dados serão adicionados automaticamente à planilha.
+A partir desse momento, sempre que alguém enviar o formulário, o site chamará o Apps Script e os dados serão adicionados automaticamente à planilha. Caso o formulário mostre a mensagem "Nenhuma URL do Google Apps Script configurada", verifica se `VITE_APP_SCRIPT_URL` ou `public/app-config.json` estão preenchidos corretamente e se o deployment do Apps Script está ativo.
 
 ## Onde ficam as imagens
 
