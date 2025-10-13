@@ -1,0 +1,68 @@
+# Site Desbrave
+
+Landing page construída com Vite + React + TypeScript para divulgar os roteiros de cicloturismo da Desbrave.
+
+## Como rodar localmente
+
+```bash
+npm install
+npm run dev
+```
+
+Cria um arquivo `.env` na raiz copiando o conteúdo de `.env.example` e preenche a variável `VITE_APP_SCRIPT_URL` conforme explicado abaixo.
+
+## Integração do formulário com Google Sheets
+
+O formulário do mini-guia envia os dados através da função `enviarLead`, que espera um endpoint HTTP capaz de receber JSON. A forma mais simples de conectar com a tua planilha é usando um Google Apps Script publicado como Web App.
+
+1. Abre a planilha [`Mini guia Desbrave`](https://docs.google.com/spreadsheets/d/1HjF6eQFk1ZlidNZvPXxYrLsp0nrOAkhkcr4paWzVkOY/edit).
+2. Vai em **Extensões → Apps Script**. Um novo projeto de script será criado atrelado a essa planilha.
+3. Substitui o conteúdo do editor pelo código abaixo (ajusta o nome da aba em `SHEET_NAME` se necessário):
+
+   ```ts
+   const SHEET_NAME = 'Página1';
+
+   function doPost(e: GoogleAppsScript.Events.DoPost) {
+     try {
+       const body = JSON.parse(e.postData.contents);
+       const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+
+       if (!sheet) {
+         throw new Error(`A aba ${SHEET_NAME} não existe.`);
+       }
+
+       sheet.appendRow([
+         new Date(),
+         body.nomeCompleto,
+         body.email,
+         body.whatsapp,
+         body.interessePrincipal,
+         body.cidadeUF,
+       ]);
+
+       return ContentService
+         .createTextOutput(JSON.stringify({ ok: true }))
+         .setMimeType(ContentService.MimeType.JSON);
+     } catch (error) {
+       return ContentService
+         .createTextOutput(JSON.stringify({ ok: false, message: error instanceof Error ? error.message : 'Erro desconhecido' }))
+         .setMimeType(ContentService.MimeType.JSON)
+         .setResponseCode(500);
+     }
+   }
+   ```
+
+4. Clica em **Deploy → New deployment**, escolhe o tipo **Web app**, define qualquer descrição, em **Execute as** seleciona *Você* e em **Quem tem acesso** marca *Anyone*. Confirma em **Deploy** e copia a URL gerada.
+5. Cola a URL na variável `VITE_APP_SCRIPT_URL` do teu arquivo `.env`.
+6. Reinicia o servidor de desenvolvimento (`npm run dev`) para que a nova variável seja carregada.
+
+A partir desse momento, sempre que alguém enviar o formulário, o site chamará o Apps Script e os dados serão adicionados automaticamente à planilha.
+
+## Onde ficam as imagens
+
+O projeto não guarda arquivos de imagem localmente. Os pontos que exibem imagens usam URLs hospedadas em `https://desbravecicloturismo.com.br`:
+
+- O JSON-LD em `src/App.tsx` aponta para `logo.png` e `hero.jpg`, usados nos rich snippets do Google.
+- As meta tags Open Graph e Twitter em `index.html` usam `og-image.jpg`, que é a prévia compartilhada em redes sociais.
+
+Para trocar esses visuais, basta substituir as URLs pelos caminhos dos teus novos arquivos (por exemplo, enviando as imagens para outro domínio ou adicionando-as à pasta `public/` do Vite e referenciando-as como `/nome-do-arquivo.jpg`).
