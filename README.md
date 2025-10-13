@@ -56,6 +56,16 @@ O formulário do mini-guia envia os dados através da função `enviarLead`, que
 5. Cola a URL na variável `VITE_APP_SCRIPT_URL` do teu arquivo `.env` ou, se preferir manter a configuração fora do build, abre `public/app-config.json` e preenche o campo `appScriptUrl` com a mesma URL.
 6. Reinicia o servidor de desenvolvimento (`npm run dev`) para que a nova variável seja carregada (se usares `.env`). Para a configuração via `public/app-config.json`, basta salvar o arquivo e recarregar a página.
 
+### Onde reiniciar o servidor de desenvolvimento
+
+O servidor roda no terminal em que executaste `npm run dev`. Para reiniciá-lo:
+
+1. Volta ao terminal/console onde o comando está em execução e pressiona `Ctrl + C` para interromper o processo atual.
+2. No mesmo diretório do projeto (`Site-desbrave`), executa novamente `npm run dev`.
+3. Abre ou recarrega o navegador na URL indicada (normalmente `http://localhost:5173`).
+
+Se estiveres usando um ambiente como VS Code, o terminal integrado funciona da mesma maneira: interrompe com `Ctrl + C` e roda `npm run dev` novamente.
+
 A partir desse momento, sempre que alguém enviar o formulário, o site chamará o Apps Script e os dados serão adicionados automaticamente à planilha. Caso o formulário mostre a mensagem "Nenhuma URL do Google Apps Script configurada", verifica se `VITE_APP_SCRIPT_URL` ou `public/app-config.json` estão preenchidos corretamente e se o deployment do Apps Script está ativo.
 
 ## Onde ficam as imagens
