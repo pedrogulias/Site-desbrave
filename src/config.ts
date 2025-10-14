@@ -5,13 +5,36 @@ export type AppConfig = {
 let cachedConfig: AppConfig | null = null;
 let configPromise: Promise<AppConfig> | null = null;
 
+function resolveConfigUrl() {
+  const base = import.meta.env.BASE_URL ?? '/';
+
+  if (typeof window !== 'undefined' && window.location) {
+    try {
+      const baseUrl = new URL(base, window.location.origin);
+      return new URL('app-config.json', baseUrl).toString();
+    } catch (error) {
+      console.warn('Não foi possível construir URL absoluta para app-config.json', error);
+    }
+  }
+
+  const normalizedBase = base && base !== '' ? base : '/';
+  if (normalizedBase.endsWith('/')) {
+    return `${normalizedBase}app-config.json`;
+  }
+
+  return `${normalizedBase}/app-config.json`;
+}
+
+
 async function loadConfig(): Promise<AppConfig> {
   if (cachedConfig) {
     return cachedConfig;
   }
 
   if (!configPromise) {
-    configPromise = fetch('/app-config.json')
+   const configUrl = resolveConfigUrl();
+
+    configPromise = fetch(configUrl)
       .then(async (response) => {
         if (!response.ok) {
           if (response.status === 404) {
