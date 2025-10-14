@@ -3,6 +3,8 @@ import { Menu, X, ChevronDown, MapPin, Clock, TrendingUp, Phone, Mail, Instagram
 import { enviarLead } from './leadService';
 
 const WHATSAPP_NUMBER = '5551981516983';
+const WHATSAPP_E164 = '+5551981516983';
+const WHATSAPP_DISPLAY_NUMBER = '+55 51 98151-6983';
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
 
 const createEmptyLeadForm = () => ({
@@ -262,7 +264,7 @@ ${customRouteData.healthNotes ? 'Obs: ' + customRouteData.healthNotes : ''}
             },
             "contactPoint": {
               "@type": "ContactPoint",
-              "telephone": "+55-51-99999-9999",
+              "telephone": WHATSAPP_E164,
               "contactType": "Customer Service",
               "availableLanguage": "Portuguese"
             },
@@ -482,7 +484,7 @@ ${customRouteData.healthNotes ? 'Obs: ' + customRouteData.healthNotes : ''}
                       value={leadFormData.phone}
                       onChange={(e) => setLeadFormData({...leadFormData, phone: e.target.value})}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                      placeholder="+55 51 99999-9999"
+                      placeholder={WHATSAPP_DISPLAY_NUMBER}
                       pattern="^\+?[0-9\s\-()]+$"
                     />
                   </div>
@@ -1184,7 +1186,7 @@ ${customRouteData.healthNotes ? 'Obs: ' + customRouteData.healthNotes : ''}
               <div className="space-y-3 text-sm">
                 <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-400 hover:text-emerald-400 transition-colors">
                   <Phone className="h-4 w-4 mr-2" />
-                  (51) 99999-9999
+                  {WHATSAPP_DISPLAY_NUMBER}
                 </a>
                 <a href="mailto:contato@desbravecicloturismo.com.br" className="flex items-center text-gray-400 hover:text-emerald-400 transition-colors">
                   <Mail className="h-4 w-4 mr-2" />
