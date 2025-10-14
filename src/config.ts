@@ -5,24 +5,46 @@ export type AppConfig = {
 let cachedConfig: AppConfig | null = null;
 let configPromise: Promise<AppConfig> | null = null;
 
-function resolveConfigUrl() {
-  const base = import.meta.env.BASE_URL ?? '/';
+function ensureTrailingSlash(path: string) {
+  return path.endsWith('/') ? path : `${path}/`;
+}
+
+function resolveConfigUrlCandidates() {
+  const candidates = new Set<string>();
+  const base = (import.meta.env.BASE_URL ?? '/').trim();
+
+  const normalizedBase = base === '' ? '/' : base;
 
   if (typeof window !== 'undefined' && window.location) {
+    const { origin, href } = window.location;
+
     try {
-      const baseUrl = new URL(base, window.location.origin);
-      return new URL('app-config.json', baseUrl).toString();
+      const baseUrl = new URL(normalizedBase, origin);
+      candidates.add(new URL('app-config.json', baseUrl).toString());
     } catch (error) {
-      console.warn('Não foi possível construir URL absoluta para app-config.json', error);
+      console.warn('Não foi possível construir URL absoluta para app-config.json a partir do BASE_URL', error);
+    }
+
+    try {
+      candidates.add(new URL('app-config.json', href).toString());
+    } catch (error) {
+      console.warn('Não foi possível construir URL relativa para app-config.json a partir da página atual', error);
     }
   }
 
-  const normalizedBase = base && base !== '' ? base : '/';
-  if (normalizedBase.endsWith('/')) {
-    return `${normalizedBase}app-config.json`;
+  if (normalizedBase.startsWith('http://') || normalizedBase.startsWith('https://')) {
+    candidates.add(`${ensureTrailingSlash(normalizedBase)}app-config.json`);
+  } else {
+    const basePath = ensureTrailingSlash(normalizedBase);
+    if (typeof window !== 'undefined' && window.location) {
+      candidates.add(`${window.location.origin}${basePath}app-config.json`);
+    }
+    candidates.add(`${basePath}app-config.json`);
   }
 
-  return `${normalizedBase}/app-config.json`;
+  candidates.add('app-config.json');
+
+  return Array.from(candidates);
 }
 
 
@@ -32,30 +54,35 @@ async function loadConfig(): Promise<AppConfig> {
   }
 
   if (!configPromise) {
-   const configUrl = resolveConfigUrl();
+    const urlCandidates = resolveConfigUrlCandidates();
 
-    configPromise = fetch(configUrl)
-      .then(async (response) => {
-        if (!response.ok) {
-          if (response.status === 404) {
-            return {} as AppConfig;
+    configPromise = (async () => {
+      for (const candidate of urlCandidates) {
+        try {
+          const response = await fetch(candidate, { cache: 'no-store' });
+
+          if (!response.ok) {
+            if (response.status === 404) {
+              continue;
+            }
+
+            throw new Error(`Falha ao carregar app-config.json (${response.status}) de ${candidate}`);
           }
 
-          throw new Error(`Falha ao carregar app-config.json (${response.status})`);
-        }
-
-        try {
-          const data = (await response.json()) as AppConfig;
-          return data ?? {};
+          try {
+            const data = (await response.json()) as AppConfig;
+            return data ?? {};
+          } catch (error) {
+            console.error('Não foi possível interpretar app-config.json', error);
+            return {} as AppConfig;
+          }
         } catch (error) {
-          console.error('Não foi possível interpretar app-config.json', error);
-          return {} as AppConfig;
+          console.warn(`Erro ao buscar app-config.json em ${candidate}`, error);
         }
-      })
-      .catch((error) => {
-        console.warn('Erro ao buscar app-config.json', error);
-        return {} as AppConfig;
-      })
+      }
+
+      return {} as AppConfig;
+    })()
       .finally(() => {
         configPromise = null;
       });
