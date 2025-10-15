@@ -94,14 +94,31 @@ const ROUTES = [
   }
 ];
 
-const getRouteImage = (routeId: string) => {
-  if (routeId === 'caminho-ouro') {
-  }
-  const pexelsIds: Record<string, string> = {
-    'cascatas-montanhas': '417074',
-    'porto-alegre-entorno': '919606',
+const ROUTE_IMAGE_OVERRIDES: Record<string, string> = {
+  'caminho-ouro': '/logo-caminho-ouro.jpg',
+};
 
-  return `https://images.pexels.com/photos/${imageId}/pexels-photo-${imageId}.jpeg?auto=compress&cs=tinysrgb&w=800`;
+const ROUTE_PEXELS_IMAGE_IDS: Record<string, string> = {
+  'rota-romantica': '1642161',
+  'cascatas-montanhas': '417074',
+  'bikepacking-pombas': '1230302',
+  'porto-alegre-entorno': '919606',
+};
+
+const DEFAULT_ROUTE_IMAGE_ID = '919606';
+
+const buildPexelsImageUrl = (imageId: string) =>
+  `https://images.pexels.com/photos/${imageId}/pexels-photo-${imageId}.jpeg?auto=compress&cs=tinysrgb&w=800`;
+
+const getRouteImage = (routeId: string) => {
+  const overrideImage = ROUTE_IMAGE_OVERRIDES[routeId];
+  if (overrideImage) {
+    return overrideImage;
+  }
+
+  const imageId = ROUTE_PEXELS_IMAGE_IDS[routeId] || DEFAULT_ROUTE_IMAGE_ID;
+  return buildPexelsImageUrl(imageId);
+};
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
