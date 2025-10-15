@@ -94,6 +94,15 @@ const ROUTES = [
   }
 ];
 
+const getRouteImage = (routeId: string) => {
+  if (routeId === 'caminho-ouro') {
+  }
+  const pexelsIds: Record<string, string> = {
+    'cascatas-montanhas': '417074',
+    'porto-alegre-entorno': '919606',
+
+  return `https://images.pexels.com/photos/${imageId}/pexels-photo-${imageId}.jpeg?auto=compress&cs=tinysrgb&w=800`;
+
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedRoute, setSelectedRoute] = useState<typeof ROUTES[0] | null>(null);
@@ -580,7 +589,7 @@ ${customRouteData.healthNotes ? 'Obs: ' + customRouteData.healthNotes : ''}
               <div key={route.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                 <div className="h-48 bg-gradient-to-br from-emerald-400 to-sky-500 relative">
                   <img
-                    src={`https://images.pexels.com/photos/${route.id === 'caminho-ouro' ? '3763847' : route.id === 'rota-romantica' ? '1642161' : route.id === 'cascatas-montanhas' ? '417074' : route.id === 'bikepacking-pombas' ? '1230302' : '919606'}/pexels-photo-${route.id === 'caminho-ouro' ? '3763847' : route.id === 'rota-romantica' ? '1642161' : route.id === 'cascatas-montanhas' ? '417074' : route.id === 'bikepacking-pombas' ? '1230302' : '919606'}.jpeg?auto=compress&cs=tinysrgb&w=800`}
+                    src={getRouteImage(route.id)}
                     alt={route.name}
                     loading="lazy"
                     className="w-full h-full object-cover"
