@@ -29,7 +29,7 @@ const ROUTES = [
     notIncludes: 'Bicicleta (aluguel disponível), alimentação',
     nextDate: 'Sob demanda',
     description: 'Pedala pela história do caminho dos tropeiros, com vistas de tirar o fôlego e paradas em cachoeiras escondidas.',
-    itinerary: ['Partida de Maquiné', 'Subida suave pela serra', 'Parada na Cascata do Ouro', 'Descida técnica pelos vales', 'Chegada com vista panorâmica'],
+    itinerary: ['Partida na igreja matriz de Maquiné', 'Pedal leve até Sítio Recanto da Fonte - Meliponário e Meditação Guiada', 'Almoço na pousada Refúgio Verde', 'Banho na cachoeira da Forqueta', 'Visita a Escola de Sustentabilidade Bandeira Branca'],
     whatToBring: ['Mochila leve (até 5L)', 'Água (1,5L mínimo)', 'Lanche energético', 'Protetor solar', 'Óculos de sol', 'Roupa confortável']
   },
   {
