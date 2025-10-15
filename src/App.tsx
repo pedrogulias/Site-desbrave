@@ -24,13 +24,13 @@ const ROUTES = [
     distance: '40 km',
     duration: 'Dia inteiro',
     difficulty: 'Iniciante/Intermediário',
-    terrain: 'Serra e vales',
-    includes: 'Guia credenciado, briefing de segurança, paradas estratégicas',
-    notIncludes: 'Bicicleta (aluguel disponível), alimentação, translado até Maquiné',
+    terrain: 'Estrada de terra',
+    includes: 'Guia de cicloturismo, hidratação, entrada em todas experiências, almoço',
+    notIncludes: 'Bicicleta (aluguel disponível), e-bike (aluguel disponível), translado até Maquiné',
     nextDate: 'Sob demanda',
     description: 'Uma pedalada acessível de ~40 km — sem subida de serra e em ritmo tranquilo — que reúne natureza, bem-estar e sabores locais: meliponicultura com meditação, almoço caseiro, visita a pequeno produtor, banho na Cachoeira da Forqueta e tour ecológico; guiada e ideal para iniciantes e ciclistas ocasionais.',
     itinerary: ['Partida na igreja matriz de Maquiné', 'Pedal leve até Sítio Recanto da Fonte - Meliponário e Meditação Guiada', 'Almoço na pousada Refúgio Verde', 'Banho na cachoeira da Forqueta', 'Visita a Escola de Sustentabilidade Bandeira Branca'],
-    whatToBring: ['Mochila leve (até 5L)', 'Água (1,5L mínimo)', 'Lanche energético', 'Protetor solar', 'Óculos de sol', 'Roupa confortável']
+    whatToBring: ['Mochila leve (até 5L)', 'Água/Isotônico', 'Lanches pessoais', 'Protetor solar e repelente', 'Óculos de sol', 'Roupa confortável']
   },
   {
     id: 'rota-romantica',
