@@ -17,6 +17,8 @@ jobs:
           node-version: '20'
       - run: npm ci
       - run: npm run build
+          env:
+            VITE_APP_SCRIPT_URL: ${{ secrets.VITE_APP_SCRIPT_URL }}
       # define o domínio canônico
       - name: Set CNAME
         run: echo "www.desbravecicloturismo.com.br" > ./dist/CNAME
