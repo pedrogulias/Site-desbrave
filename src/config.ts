@@ -94,7 +94,7 @@ async function loadConfig(): Promise<AppConfig> {
 }
 
 export async function getAppScriptUrl(): Promise<string | undefined> {
-  const envUrl = import.meta.env.VITE_APP_SCRIPT_URL?.trim();
+  const envUrl = 'https://script.google.com/macros/s/AKfycbwZG1u_dayaOWJspNS7R2iZtqitENeW7r_mLZzqDilfxmNgDckFX9BN2XmaMB2wbz5z/exec';
 
   if (envUrl) {
     return envUrl;
