@@ -26,7 +26,7 @@ export default function AboutSection() {
                 checagem de bicicletas, ritmo confortável para todos e condutores com formação técnica baseada
                 na ABNT NBR ISO 21102 (condutor de ecoturismo).
               </p>
-              <p className="font-semibold text-emerald-700">
+              <p className="font-semibold text-laranja-400">
                 Aqui, tu pedala no teu ritmo, conhece gente bacana e volta renovado.
               </p>
             </div>

@@ -14,19 +14,19 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen }: HeaderProp
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <MapPin className="h-8 w-8 text-emerald-600" />
+            <MapPin className="h-8 w-8 text-laranja-400" />
             <span className="ml-2 text-xl font-bold text-gray-900">Desbrave</span>
           </div>
 
           {/* Desktop Menu */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#roteiros" className="text-gray-700 hover:text-emerald-600 transition-colors">Roteiros</a>
-            <a href="#sobre" className="text-gray-700 hover:text-emerald-600 transition-colors">Sobre</a>
-            <a href="#contato" className="text-gray-700 hover:text-emerald-600 transition-colors">Contato</a>
-            <a href="#rota-personalizada" className="text-gray-700 hover:text-emerald-600 transition-colors">Solicite sua rota</a>
+            <a href="#roteiros" className="text-gray-700 hover:text-laranja-400 transition-colors">Roteiros</a>
+            <a href="#sobre" className="text-gray-700 hover:text-laranja-400 transition-colors">Sobre</a>
+            <a href="#contato" className="text-gray-700 hover:text-laranja-400 transition-colors">Contato</a>
+            <a href="#rota-personalizada" className="text-gray-700 hover:text-laranja-400 transition-colors">Solicite sua rota</a>
             <button
               onClick={() => handleWhatsAppClick()}
-              className="bg-emerald-600 text-white px-6 py-2 rounded-full hover:bg-emerald-700 transition-all transform hover:scale-105 shadow-md"
+              className="bg-laranja-400 text-white px-6 py-2 rounded-full hover:bg-laranja-500 transition-all transform hover:scale-105 shadow-md"
             >
               Chamar no WhatsApp
             </button>
@@ -46,16 +46,16 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen }: HeaderProp
         {mobileMenuOpen && (
           <nav className="md:hidden py-4 border-t">
             <div className="flex flex-col space-y-4">
-              <a href="#roteiros" className="text-gray-700 hover:text-emerald-600 transition-colors" onClick={() => setMobileMenuOpen(false)}>Roteiros</a>
-              <a href="#sobre" className="text-gray-700 hover:text-emerald-600 transition-colors" onClick={() => setMobileMenuOpen(false)}>Sobre</a>
-              <a href="#contato" className="text-gray-700 hover:text-emerald-600 transition-colors" onClick={() => setMobileMenuOpen(false)}>Contato</a>
-              <a href="#rota-personalizada" className="text-gray-700 hover:text-emerald-600 transition-colors" onClick={() => setMobileMenuOpen(false)}>Solicite sua rota</a>
+              <a href="#roteiros" className="text-gray-700 hover:text-laranja-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>Roteiros</a>
+              <a href="#sobre" className="text-gray-700 hover:text-laranja-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>Sobre</a>
+              <a href="#contato" className="text-gray-700 hover:text-laranja-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>Contato</a>
+              <a href="#rota-personalizada" className="text-gray-700 hover:text-laranja-400 transition-colors" onClick={() => setMobileMenuOpen(false)}>Solicite sua rota</a>
               <button
                 onClick={() => {
                   handleWhatsAppClick();
                   setMobileMenuOpen(false);
                 }}
-                className="bg-emerald-600 text-white px-6 py-2 rounded-full hover:bg-emerald-700 transition-all text-center"
+                className="bg-laranja-400 text-white px-6 py-2 rounded-full hover:bg-laranja-500 transition-all text-center"
               >
                 Chamar no WhatsApp
               </button>

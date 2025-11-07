@@ -11,10 +11,10 @@ export default function CustomRouteForm() {
 
   if (customRouteSubmitted) {
     return (
-      <section id="rota-personalizada" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-emerald-50 to-sky-50">
+      <section id="rota-personalizada" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-laranja-50 to-azul-50">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 text-center">
-            <Check className="h-16 w-16 text-emerald-600 mx-auto mb-4" />
+            <Check className="h-16 w-16 text-laranja-400 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Proposta em andamento!</h3>
             <p className="text-lg text-gray-600">
               Recebemos tua solicitação. Vamos te atender no WhatsApp agora com uma proposta personalizada.
@@ -26,7 +26,7 @@ export default function CustomRouteForm() {
   }
 
   return (
-    <section id="rota-personalizada" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-emerald-50 to-sky-50">
+    <section id="rota-personalizada" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-laranja-50 to-azul-50">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Solicite uma rota personalizada</h2>
@@ -47,7 +47,7 @@ export default function CustomRouteForm() {
                   required
                   value={customRouteData.experienceType}
                   onChange={(e) => setCustomRouteData({...customRouteData, experienceType: e.target.value})}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-laranja-400"
                 >
                   <option value="">Escolhe</option>
                   <option value="meio-periodo">Meio período</option>
@@ -65,7 +65,7 @@ export default function CustomRouteForm() {
                   required
                   value={customRouteData.distance}
                   onChange={(e) => setCustomRouteData({...customRouteData, distance: e.target.value})}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-laranja-400"
                 >
                   <option value="">Escolhe</option>
                   <option value="ate-20km">Até 20 km</option>
@@ -86,7 +86,7 @@ export default function CustomRouteForm() {
                   required
                   value={customRouteData.pace}
                   onChange={(e) => setCustomRouteData({...customRouteData, pace: e.target.value})}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-laranja-400"
                 >
                   <option value="">Escolhe</option>
                   <option value="relax">Relax (muitas paradas)</option>
@@ -103,7 +103,7 @@ export default function CustomRouteForm() {
                   required
                   value={customRouteData.terrain}
                   onChange={(e) => setCustomRouteData({...customRouteData, terrain: e.target.value})}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-laranja-400"
                 >
                   <option value="">Escolhe</option>
                   <option value="urbano">Urbano</option>
@@ -124,7 +124,7 @@ export default function CustomRouteForm() {
                   required
                   value={customRouteData.needBike}
                   onChange={(e) => setCustomRouteData({...customRouteData, needBike: e.target.value})}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-laranja-400"
                 >
                   <option value="">Escolhe</option>
                   <option value="nao">Não, tenho a minha</option>
@@ -142,7 +142,7 @@ export default function CustomRouteForm() {
                     required
                     value={customRouteData.bikeType}
                     onChange={(e) => setCustomRouteData({...customRouteData, bikeType: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-laranja-400"
                   >
                     <option value="">Escolhe</option>
                     <option value="convencional">Convencional</option>
@@ -160,7 +160,7 @@ export default function CustomRouteForm() {
                   required
                   value={customRouteData.needTransfer}
                   onChange={(e) => setCustomRouteData({...customRouteData, needTransfer: e.target.value})}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-laranja-400"
                 >
                   <option value="">Escolhe</option>
                   <option value="nao">Não preciso</option>
@@ -179,7 +179,7 @@ export default function CustomRouteForm() {
                   required
                   value={customRouteData.groupLevel}
                   onChange={(e) => setCustomRouteData({...customRouteData, groupLevel: e.target.value})}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-laranja-400"
                 >
                   <option value="">Escolhe</option>
                   <option value="iniciante">Iniciante</option>
@@ -200,7 +200,7 @@ export default function CustomRouteForm() {
                   max="20"
                   value={customRouteData.participants}
                   onChange={(e) => setCustomRouteData({...customRouteData, participants: e.target.value})}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-laranja-400"
                   placeholder="2"
                 />
               </div>
@@ -217,7 +217,7 @@ export default function CustomRouteForm() {
                   required
                   value={customRouteData.dateWindow}
                   onChange={(e) => setCustomRouteData({...customRouteData, dateWindow: e.target.value})}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-laranja-400"
                   placeholder="Ex: primeira quinzena de dezembro"
                 />
               </div>
@@ -232,7 +232,7 @@ export default function CustomRouteForm() {
                   required
                   value={customRouteData.originCity}
                   onChange={(e) => setCustomRouteData({...customRouteData, originCity: e.target.value})}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-laranja-400"
                   placeholder="Porto Alegre/RS"
                 />
               </div>
@@ -247,7 +247,7 @@ export default function CustomRouteForm() {
                 rows={3}
                 value={customRouteData.healthNotes}
                 onChange={(e) => setCustomRouteData({...customRouteData, healthNotes: e.target.value})}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-laranja-400"
                 placeholder="Alguma condição que devemos saber? (alergias, limitações físicas, etc.)"
               />
             </div>
@@ -260,10 +260,10 @@ export default function CustomRouteForm() {
                   required
                   checked={customRouteData.riskConsent}
                   onChange={(e) => setCustomRouteData({...customRouteData, riskConsent: e.target.checked})}
-                  className="mt-1 h-5 w-5 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500"
+                  className="mt-1 h-5 w-5 text-laranja-400 border-gray-300 rounded focus:ring-laranja-400"
                 />
                 <label htmlFor="riskConsent" className="ml-3 text-sm text-gray-600">
-                  Li e aceito o <a href="#riscos" className="text-emerald-600 underline">Termo de Conhecimento de Riscos</a>. *
+                  Li e aceito o <a href="#riscos" className="text-laranja-400 underline">Termo de Conhecimento de Riscos</a>. *
                 </label>
               </div>
 
@@ -274,17 +274,17 @@ export default function CustomRouteForm() {
                   required
                   checked={customRouteData.cancelConsent}
                   onChange={(e) => setCustomRouteData({...customRouteData, cancelConsent: e.target.checked})}
-                  className="mt-1 h-5 w-5 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500"
+                  className="mt-1 h-5 w-5 text-laranja-400 border-gray-300 rounded focus:ring-laranja-400"
                 />
                 <label htmlFor="cancelConsent" className="ml-3 text-sm text-gray-600">
-                  Li e aceito a <a href="#cancelamento" className="text-emerald-600 underline">Política de Cancelamento</a>. *
+                  Li e aceito a <a href="#cancelamento" className="text-laranja-400 underline">Política de Cancelamento</a>. *
                 </label>
               </div>
             </div>
 
             <button
               type="submit"
-              className="w-full bg-emerald-600 text-white px-8 py-4 rounded-full hover:bg-emerald-700 transition-all transform hover:scale-105 shadow-lg font-semibold text-lg"
+              className="w-full bg-laranja-400 text-white px-8 py-4 rounded-full hover:bg-laranja-500 transition-all transform hover:scale-105 shadow-lg font-semibold text-lg"
             >
               Receber proposta no WhatsApp
             </button>

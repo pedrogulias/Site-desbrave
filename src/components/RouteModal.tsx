@@ -37,7 +37,7 @@ export default function RouteModal({ route, onClose }: RouteModalProps) {
             <ol className="space-y-2">
               {route.itinerary.map((step, idx) => (
                 <li key={idx} className="flex items-start">
-                  <span className="bg-emerald-600 text-white rounded-full h-6 w-6 flex items-center justify-center text-sm font-semibold mr-3 flex-shrink-0">
+                  <span className="bg-laranja-400 text-white rounded-full h-6 w-6 flex items-center justify-center text-sm font-semibold mr-3 flex-shrink-0">
                     {idx + 1}
                   </span>
                   <span className="text-gray-600">{step}</span>
@@ -62,7 +62,7 @@ export default function RouteModal({ route, onClose }: RouteModalProps) {
             <ul className="grid grid-cols-2 gap-2">
               {route.whatToBring.map((item, idx) => (
                 <li key={idx} className="flex items-center text-gray-600 text-sm">
-                  <Check className="h-4 w-4 text-emerald-600 mr-2 flex-shrink-0" />
+                  <Check className="h-4 w-4 text-laranja-400 mr-2 flex-shrink-0" />
                   {item}
                 </li>
               ))}
@@ -74,7 +74,7 @@ export default function RouteModal({ route, onClose }: RouteModalProps) {
               handleWhatsAppClick(route.name);
               onClose();
             }}
-            className="w-full bg-emerald-600 text-white px-8 py-4 rounded-full hover:bg-emerald-700 transition-all transform hover:scale-105 shadow-lg font-semibold text-lg"
+            className="w-full bg-laranja-400 text-white px-8 py-4 rounded-full hover:bg-laranja-500 transition-all transform hover:scale-105 shadow-lg font-semibold text-lg"
           >
             Reservar pelo WhatsApp
           </button>
